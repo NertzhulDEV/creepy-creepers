@@ -1,26 +1,22 @@
 /*
- * Creepy Creepers - https://github.com/tophatcats-mods/creepy-creepers
- * Copyright (C) 2016-2022 <KiriCattus>
+ * Creepy Creepers - https://github.com/NertzhulDEV/creepy-creepers
+ * Copyright (C) 2023 <Nertzhul>
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation;
- * Specifically version 2.1 of the License.
+ * This library is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
- * USA
- * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  */
-package dev.tophatcat.creepycreepers.entities;
+package dev.nertzhul.creepycreepers.entities;
 
-import dev.tophatcat.creepycreepers.init.CreepyRegistry;
+import dev.nertzhul.creepycreepers.init.CreepyRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -33,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 
-public class GhostlyCreeperEntity extends Creeper {
+public class AustralianCreeperEntity extends Creeper {
 
     /**
      * Constructor for the creeper.
@@ -41,11 +37,11 @@ public class GhostlyCreeperEntity extends Creeper {
      * @param type  The entity type.
      * @param level The current world.
      */
-    public GhostlyCreeperEntity(final EntityType<? extends Creeper> type, final Level level) {
+    public AustralianCreeperEntity(final EntityType<? extends Creeper> type, Level level) {
         super(type, level);
     }
 
-    public static boolean canSpawn(EntityType<? extends GhostlyCreeperEntity> creeper, ServerLevelAccessor world,
+    public static boolean canSpawn(EntityType<? extends AustralianCreeperEntity> creeper, ServerLevelAccessor world,
                                    MobSpawnType reason, BlockPos pos, RandomSource random) {
         return pos.getY() < 320
             && (world.getBlockState(pos.below()).is(Blocks.STONE)
@@ -76,7 +72,7 @@ public class GhostlyCreeperEntity extends Creeper {
 
             int i = this.getSwellDir();
             if (i > 0 && this.swell == 0) {
-                this.playSound(CreepyRegistry.GHOSTLY_CREEPER_SOUND.get(), 1.0F, 1.0F);
+                this.playSound(CreepyRegistry.AUSTRALIAN_CREEPER_SOUND.get(), 1.0F, 0.5F);
             }
 
             this.swell += i;

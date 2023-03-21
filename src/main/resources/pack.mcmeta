@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "${mod_name} resources",
+        "description": "Creepy Creepers resources",
         "pack_format": 12,
         "forge:resource_pack_format": 12,
         "forge:data_pack_format": 10
