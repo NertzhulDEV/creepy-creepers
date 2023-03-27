@@ -3,12 +3,12 @@
     "sounds": [
       "creepycreepers:ghostly_creeper_scream"
     ],
-    "subtitle": "ghostly_creeper_scream"
+    "subtitle": "subtitles.creepycreepers.ghostly_creeper_scream"
   },
-  "australian_creeper": {
+  "australian_creeper_scream": {
     "sounds": [
       "creepycreepers:ghostly_creeper_scream"
     ],
-    "subtitle": "australian_creeper"
+    "subtitle": "subtitles.creepycreepers.australian_creeper_scream"
   }
 }

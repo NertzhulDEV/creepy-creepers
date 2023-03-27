@@ -55,9 +55,9 @@ public class CreepyRegistry {
         () -> new ForgeSpawnEggItem(AUSTRALIAN_CREEPER, 0x0000FF, 0xFFFFFF, new Item.Properties()));
 
     public static final RegistryObject<SoundEvent> GHOSTLY_CREEPER_SOUND = SOUNDS.register("ghostly_creeper_scream",
-        () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(CreepyCreepers.MOD_ID, "ghostly_creeper_scream"), 16.0f));
-    public static final RegistryObject<SoundEvent> AUSTRALIAN_CREEPER_SOUND = SOUNDS.register("australian_creeper",
-        () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(CreepyCreepers.MOD_ID, "australian_creeper"), 16.0f));
+        () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CreepyCreepers.MOD_ID, "ghostly_creeper_scream")));
+    public static final RegistryObject<SoundEvent> AUSTRALIAN_CREEPER_SOUND = SOUNDS.register("australian_creeper_scream",
+        () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CreepyCreepers.MOD_ID, "australian_creeper_scream")));
 
     public static void registerSpawns(SpawnPlacementRegisterEvent event) {
         event.register(GHOSTLY_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GhostlyCreeperEntity::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
