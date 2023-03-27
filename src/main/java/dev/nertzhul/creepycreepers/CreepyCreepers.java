@@ -1,10 +1,10 @@
 /*
- * Creepy Creepers - https://github.com/NertzhulDEV/creepy-creepers
  * Copyright (C) 2023 <Nertzhul>
+ * Creepy Creepers - https://github.com/NertzhulDEV/creepy-creepers
  *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3 of the License.
+ * the Free Software Foundation, version 3 of the license.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,6 +18,7 @@ package dev.nertzhul.creepycreepers;
 
 import dev.nertzhul.creepycreepers.client.CreeperRenderingRegistry;
 import dev.nertzhul.creepycreepers.init.CreepyRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -42,5 +43,9 @@ public class CreepyCreepers {
             mod.addListener(CreeperRenderingRegistry::registerLayerDefinition);
             mod.addListener(CreepyRegistry::addToCreativeTabs);
         }
+    }
+
+    public static ResourceLocation resource(String pValue) {
+        return new ResourceLocation(MOD_ID, pValue);
     }
 }
