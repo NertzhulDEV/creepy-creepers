@@ -19,8 +19,8 @@ package dev.nertzhul.creepycreepers.client.rendering;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.nertzhul.creepycreepers.client.models.GhostlyCreeperModel;
 import dev.nertzhul.creepycreepers.CreepyCreepers;
+import dev.nertzhul.creepycreepers.client.models.GhostlyCreeperModel;
 import dev.nertzhul.creepycreepers.entities.GhostlyCreeperEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -31,30 +31,28 @@ import net.minecraft.util.Mth;
 import javax.annotation.Nonnull;
 
 public class GhostlyCreeperRenderer extends MobRenderer<GhostlyCreeperEntity, GhostlyCreeperModel<GhostlyCreeperEntity>> {
-
-    private static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(CreepyCreepers.MOD_ID,
-        "textures/entity/ghostly_creeper.png");
+    private static final ResourceLocation RESOURCE_LOCATION = CreepyCreepers.resource("textures/entity/ghostly_creeper.png");
 
     public GhostlyCreeperRenderer(final EntityRendererProvider.Context context) {
-        super(context, new GhostlyCreeperModel<>(
-            context.bakeLayer(GhostlyCreeperModel.GHOSTLY_CREEPER_LAYER_LOCATION)), 0.0F);
+        super(context, new GhostlyCreeperModel<>(context.bakeLayer(GhostlyCreeperModel.GHOSTLY_CREEPER_LAYER_LOCATION)), 0.0F);
     }
 
     @Override
     protected void scale(@Nonnull GhostlyCreeperEntity entity, @Nonnull PoseStack poseStack, float partialTickTime) {
         float f = entity.getSwelling(partialTickTime);
         float f1 = 1.0F + Mth.sin(f * 100.0F) * f * 0.01F;
+
         f = Mth.clamp(f, 0.0F, 1.0F);
         f = f * f;
         f = f * f;
+
         float f2 = (1.0F + f * 0.4F) * f1;
         float f3 = (1.0F + f * 0.1F) / f1;
         poseStack.scale(f2, f3, f2);
     }
 
     @Override
-    public void render(@Nonnull GhostlyCreeperEntity entity, float entityYaw, float partialTicks,
-                       @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
+    public void render(@Nonnull GhostlyCreeperEntity entity, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         super.render(entity, entityYaw, partialTicks, matrixStack, bufferIn, packedLightIn);

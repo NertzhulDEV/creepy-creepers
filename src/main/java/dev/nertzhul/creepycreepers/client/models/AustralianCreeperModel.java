@@ -29,15 +29,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 import javax.annotation.Nonnull;
 
 public class AustralianCreeperModel<T extends AustralianCreeperEntity> extends EntityModel<T> {
-
-    public static final ModelLayerLocation AUSTRALIAN_CREEPER_LAYER_LOCATION = new ModelLayerLocation(
-        new ResourceLocation(CreepyCreepers.MOD_ID, "australian_creeper"), "main");
+    public static final ModelLayerLocation AUSTRALIAN_CREEPER_LAYER_LOCATION = new ModelLayerLocation(CreepyCreepers.resource("australian_creeper"), "main");
 
     private final ModelPart body;
     private final ModelPart head;
@@ -61,65 +58,50 @@ public class AustralianCreeperModel<T extends AustralianCreeperEntity> extends E
 
         PartDefinition body = partDefinition.addOrReplaceChild("body",
             CubeListBuilder.create().texOffs(16, 16)
-                .addBox(-4.0F, -6.0F, -2.0F,
-                    8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)),
+                .addBox(-4.0F, -6.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)),
             PartPose.offset(0.0F, 10.0F, 0.0F));
 
         PartDefinition head = partDefinition.addOrReplaceChild("head",
             CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-4.0F, 0.0F, -4.0F,
-                    8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
+                .addBox(-4.0F, 0.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
             PartPose.offset(0.0F, 16.0F, 0.0F));
 
-        PartDefinition backRightLeg = partDefinition.addOrReplaceChild("backRightLeg",
-            CubeListBuilder.create(), PartPose.offset(-2.0F, 4.0F, 4.0F));
+        PartDefinition backRightLeg = partDefinition.addOrReplaceChild("backRightLeg", CubeListBuilder.create(), PartPose.offset(-2.0F, 4.0F, 4.0F));
 
         PartDefinition backRightLegRotation = backRightLeg.addOrReplaceChild("backRightLegRotation",
             CubeListBuilder.create().texOffs(0, 16)
-                .addBox(0.0F, -6.0F, 2.0F, 4.0F,
-                    6.0F, 4.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(2.0F, -6.0F, -4.0F,
-                0.0F, 0.0F, -3.1416F));
+                .addBox(0.0F, -6.0F, 2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
+            PartPose.offsetAndRotation(2.0F, -6.0F, -4.0F, 0.0F, 0.0F, -3.1416F));
 
-        PartDefinition frontRightLeg = partDefinition.addOrReplaceChild("frontRightLeg",
-            CubeListBuilder.create(), PartPose.offset(-2.0F, 4.0F, -4.0F));
+        PartDefinition frontRightLeg = partDefinition.addOrReplaceChild("frontRightLeg", CubeListBuilder.create(), PartPose.offset(-2.0F, 4.0F, -4.0F));
 
         PartDefinition frontRightLegRotation = frontRightLeg.addOrReplaceChild("frontRightLegRotation",
             CubeListBuilder.create().texOffs(0, 16)
-                .addBox(0.0F, -6.0F, -6.0F,
-                    4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(2.0F, -6.0F, 4.0F,
-                0.0F, 0.0F, -3.1416F));
+                .addBox(0.0F, -6.0F, -6.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
+            PartPose.offsetAndRotation(2.0F, -6.0F, 4.0F, 0.0F, 0.0F, -3.1416F));
 
-        PartDefinition frontLeftLeg = partDefinition.addOrReplaceChild("frontLeftLeg",
-            CubeListBuilder.create(), PartPose.offset(2.0F, 4.0F, -4.0F));
+        PartDefinition frontLeftLeg = partDefinition.addOrReplaceChild("frontLeftLeg", CubeListBuilder.create(), PartPose.offset(2.0F, 4.0F, -4.0F));
 
         PartDefinition frontLeftLegRotation = frontLeftLeg.addOrReplaceChild("frontLeftLegRotation",
             CubeListBuilder.create().texOffs(0, 16)
-                .addBox(-2.0F, -3.0F, -2.0F,
-                    4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(0.0F, -3.0F, 0.0F,
-                0.0F, 0.0F, -3.1416F));
+                .addBox(-2.0F, -3.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
+            PartPose.offsetAndRotation(0.0F, -3.0F, 0.0F, 0.0F, 0.0F, -3.1416F));
 
-        PartDefinition backLeftLeg = partDefinition.addOrReplaceChild("backLeftLeg",
-            CubeListBuilder.create(), PartPose.offset(2.0F, 4.0F, 4.0F));
+        PartDefinition backLeftLeg = partDefinition.addOrReplaceChild("backLeftLeg", CubeListBuilder.create(), PartPose.offset(2.0F, 4.0F, 4.0F));
 
         PartDefinition backLeftLegRotation = backLeftLeg.addOrReplaceChild("backLeftLegRotation",
             CubeListBuilder.create().texOffs(0, 16)
-                .addBox(-4.0F, -6.0F, 2.0F,
-                    4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
-            PartPose.offsetAndRotation(-2.0F, -6.0F, -4.0F,
-                0.0F, 0.0F, -3.1416F));
-
+                .addBox(-4.0F, -6.0F, 2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
+            PartPose.offsetAndRotation(-2.0F, -6.0F, -4.0F, 0.0F, 0.0F, -3.1416F));
 
         return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
     @Override
-    public void setupAnim(@Nonnull T entity, float limbSwing, float limbSwingAmount,
-                          float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@Nonnull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         head.xRot = headPitch * ((float) Math.PI / 180F);
+
         backRightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         backLeftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         frontRightLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
@@ -127,10 +109,10 @@ public class AustralianCreeperModel<T extends AustralianCreeperEntity> extends E
     }
 
     @Override
-    public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer vertexConsumer,
-                               int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+
         backRightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         frontLeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         frontRightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);

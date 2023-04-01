@@ -1,8 +1,3 @@
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
-
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-
 buildscript {
     repositories {
         mavenCentral()
@@ -22,8 +17,8 @@ plugins {
 }
 
 version = "${mod_version}"
-group = "${mod_group}"
-archivesBaseName = "${mod_name}-${minecraft_version}"
+group = 'dev.nertzhul.creepycreepers'
+archivesBaseName = "${mod_name}-Forge-${minecraft_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 minecraft {
@@ -123,9 +118,7 @@ var manifestAttributes = [
         "Implementation-Title"    : mod_name,
         "Implementation-Version"  : project.jar.archiveVersion,
         "Implementation-Vendor"   : 'Nertzhul',
-        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-        "Built-On-Java"           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
-        "Build-On-Minecraft"      : minecraft_version
+        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 ]
 
 jar {
@@ -160,34 +153,18 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-final var actualDateTime = OffsetDateTime.now(ZoneOffset.UTC).withNano(0)
 license {
-    ignoreFailures = false
     header = project.file('LicenseHeader.txt')
+    ignoreFailures = false
+    newLine = false
     include '**/*.java'
     include '**/*.kt'
     exclude '**/package-info.java'
     exclude '**/module-info.java'
-    newLine = false
+
     properties {
         name = mod_name
         source = mod_source
         author = 'Nertzhul'
     }
 }
-
-task publishToCurseForge(type: TaskPublishCurseForge) {
-    apiToken = project.findProperty("curseforge_api_token") ?: "invalid/no CurseForge API token found!"
-
-    def mainFile = upload(curseforge_project_id, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
-
-    mainFile.displayName = "${archivesBaseName}-${version}"
-    mainFile.releaseType = curseforge_release_type
-    mainFile.addModLoader(curseforge_mod_loader)
-    mainFile.addGameVersion(minecraft_version)
-    mainFile.addJavaVersion(curseforge_java_version)
-
-    mainFile.changelog = mod_changelog_url
-}
-
-tasks.publishToCurseForge.dependsOn(tasks.assemble)

@@ -16,7 +16,7 @@
  */
 package dev.nertzhul.creepycreepers.entities;
 
-import dev.nertzhul.creepycreepers.init.CreepyRegistry;
+import dev.nertzhul.creepycreepers.setup.CCSoundTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -30,7 +30,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nonnull;
 
 public class GhostlyCreeperEntity extends Creeper {
-
     /**
      * Constructor for the creeper.
      *
@@ -41,12 +40,11 @@ public class GhostlyCreeperEntity extends Creeper {
         super(type, level);
     }
 
-    public static boolean canSpawn(EntityType<? extends GhostlyCreeperEntity> creeper, ServerLevelAccessor world,
-                                   MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return pos.getY() < 320
-            && (world.getBlockState(pos.below()).is(Blocks.STONE)
-            || world.getBlockState(pos.below()).is(Blocks.DEEPSLATE))
-            && isDarkEnoughToSpawn(world, pos, random) && checkMobSpawnRules(creeper, world, reason, pos, random);
+    public static boolean canSpawn(EntityType<? extends GhostlyCreeperEntity> creeper, ServerLevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return pos.getY() < 319
+            && (world.getBlockState(pos.below()).is(Blocks.STONE) || world.getBlockState(pos.below()).is(Blocks.DEEPSLATE))
+            && isDarkEnoughToSpawn(world, pos, random)
+            && checkMobSpawnRules(creeper, world, reason, pos, random);
     }
 
     /**
@@ -56,8 +54,7 @@ public class GhostlyCreeperEntity extends Creeper {
      * @param blockUnderneath The block under the mob.
      */
     @Override
-    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull BlockState blockUnderneath) {
-    }
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull BlockState blockUnderneath) { }
 
     /**
      * We override the default creeper explosion sound here and add our own.
@@ -72,7 +69,7 @@ public class GhostlyCreeperEntity extends Creeper {
 
             int i = this.getSwellDir();
             if (i > 0 && this.swell == 0) {
-                this.playSound(CreepyRegistry.GHOSTLY_CREEPER_SOUND.get(), 1.0F, 1.0F);
+                this.playSound(CCSoundTypes.GHOSTLY_CREEPER_SOUND.get(), 1.0F, 1.0F);
             }
 
             this.swell += i;

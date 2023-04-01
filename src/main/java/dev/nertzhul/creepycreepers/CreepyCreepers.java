@@ -16,33 +16,32 @@
  */
 package dev.nertzhul.creepycreepers;
 
-import dev.nertzhul.creepycreepers.client.CreeperRenderingRegistry;
-import dev.nertzhul.creepycreepers.init.CreepyRegistry;
+import dev.nertzhul.creepycreepers.setup.CCEntityTypes;
+import dev.nertzhul.creepycreepers.setup.CCItems;
+import dev.nertzhul.creepycreepers.setup.CCSoundTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 
 @Mod(CreepyCreepers.MOD_ID)
 public class CreepyCreepers {
     public static final String MOD_ID = "creepycreepers";
 
     public CreepyCreepers() {
-        IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        CreepyRegistry.ENTITIES.register(mod);
-        CreepyRegistry.ITEMS.register(mod);
-        CreepyRegistry.SOUNDS.register(mod);
+        CCItems.ITEMS.register(modBus);
+        CCEntityTypes.ENTITIES.register(modBus);
+        CCSoundTypes.SOUNDS.register(modBus);
 
-        mod.addListener(CreepyRegistry::registerSpawns);
-        mod.addListener(CreepyRegistry::registerAttributes);
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            mod.addListener(CreeperRenderingRegistry::registerEntityModels);
-            mod.addListener(CreeperRenderingRegistry::registerLayerDefinition);
-            mod.addListener(CreepyRegistry::addToCreativeTabs);
-        }
+        modBus.addListener(CCItems::registerCreativeTab);
+        modBus.addListener(CCEntityTypes::registerSpawns);
+        modBus.addListener(CCEntityTypes::registerAttributes);
+
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CreepyCreepersClient::new);
     }
 
     public static ResourceLocation resource(String pValue) {
