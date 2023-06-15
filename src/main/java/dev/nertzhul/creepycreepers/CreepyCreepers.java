@@ -33,6 +33,7 @@ public class CreepyCreepers {
     public CreepyCreepers() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        CCItems.CREATIVE_TABS.register(modBus);
         CCItems.ITEMS.register(modBus);
         CCEntityTypes.ENTITIES.register(modBus);
         CCSoundTypes.SOUNDS.register(modBus);

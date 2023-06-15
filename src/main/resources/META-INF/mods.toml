@@ -1,13 +1,13 @@
 modLoader="javafml"
-loaderVersion="[44,)"
+loaderVersion="[46,)"
 license="GNU General Public License v3.0"
 issueTrackerURL="https://github.com/NertzhulDEV/creepy-creepers/issues"
 
 [[mods]]
-modId="creepycreepers"
-version="${file.jarVersion}"
-displayName="Creepy Creepers"
-updateJSONURL="https://raw.githubusercontent.com/NertzhulDEV/creepy-creepers/dev/updates.json"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+updateJSONURL="https://www.nertzhul.dev/mods/creepy-creepers/updates.json"
 displayURL="https://curseforge.com/minecraft/mc-mods/creepy-creepers"
 credits="KiriCattus, Paint_Ninja"
 authors="Nertzhul"
@@ -15,16 +15,16 @@ description='''
 Creepers be creepin!
 '''
 
-[[dependencies.creepycreepers]]
+[[dependencies.${mod_id}]]
 modId="forge"
 mandatory=true
-versionRange="[44,)"
+versionRange="[46.0.14,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.creepycreepers]]
+[[dependencies.${mod_id}]]
 modId="minecraft"
 mandatory=true
-versionRange="[${minecraft_version}]"
+versionRange="[1.20,)"
 ordering="NONE"
 side="BOTH"

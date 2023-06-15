@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.cadixdev.licenser' version '0.6.1'
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
@@ -23,6 +23,7 @@ archivesBaseName = "${mod_name}-Forge-${minecraft_version}"
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 minecraft {
     mappings channel: 'parchment', version: "${mappings_version}-${minecraft_version}"
+    copyIdeResources = true
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
@@ -100,14 +101,17 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def replaceProperties = [
+        minecraft_version: minecraft_version, forge_version: forge_version,
+        mod_id: mod_id, mod_name: mod_name, mod_version: mod_version
+]
 processResources {
-    def buildProps = project.properties.clone()
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
 
-    // Replaces FML's magic file.jarVersion string with the correct version at build time.
-    buildProps.put('file', [jarVersion: mod_version])
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand buildProps
+    filesMatching(resourceTargets) {
+        expand replaceProperties
     }
 }
 
